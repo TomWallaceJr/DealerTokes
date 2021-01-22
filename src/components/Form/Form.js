@@ -1,6 +1,6 @@
 import React from 'react'
 import cx from 'classnames'
-import './Form.css'
+
 
 export function Label({ className, ...props }) {
   return (
@@ -8,7 +8,7 @@ export function Label({ className, ...props }) {
   )
 }
 
-export const Input =  React.forwardRef(({ className, ...props }, ref) => {
+export const Input = React.forwardRef(({ className, ...props }, ref) => {
   return (
     <input className={cx('Input', className)} type='text' ref={ref} {...props} />
   )

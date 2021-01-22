@@ -18,6 +18,8 @@ class DashboardRoute extends Component {
         },
       });
       const res = await response.json();
+
+      // set context values 
       this.context.setLanguage(res.language.name);
       this.context.setWords(res.words);
       console.log(res.words)

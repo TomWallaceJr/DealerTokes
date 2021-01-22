@@ -6,23 +6,14 @@ import IdleService from '../services/idle-service'
 const UserContext = React.createContext({
   user: {},
   error: null,
-  language: null,
-  words: null,
-  nextWord: null,
   response: null,
-  guess: null,
   submitted: false,
-  setGuess: () => { },
   setResponse: () => { },
   setError: () => { },
   clearError: () => { },
   setUser: () => { },
   processLogin: () => { },
   processLogout: () => { },
-  setLanguage: () => { },
-  setWords: () => { },
-  setNextWord: () => { },
-  setTotalScore: () => { },
   setClicked: () => { },
 })
 
@@ -34,15 +25,8 @@ export class UserProvider extends Component {
     const state = {
       user: {},
       error: null,
-      language: null,
-      words: null,
-      nextWord: null,
-      totalScore: null,
-      currWord: null,
-      guess: null,
       response: null,
       submitted: false,
-      currentWord: "",
     }
 
     const jwtPayload = TokenService.parseAuthToken()
@@ -85,45 +69,9 @@ export class UserProvider extends Component {
     this.setState({ user })
   }
 
-  setLanguage = (language) => {
-    this.setState({
-      language: language,
-    });
-  };
-
-  setWords = (words) => {
-    this.setState({
-      words: words,
-    });
-  };
-
-  setCurrentWord = (word) => {
-    this.setState({
-      currentWord: word,
-    });
-  };
-
-  setNextWord = (word) => {
-    this.setState({
-      nextWord: word,
-    });
-  };
-
   setResponse = (response) => {
     this.setState({
       response: response,
-    });
-  };
-
-  setGuess = (guess) => {
-    this.setState({
-      guess: guess,
-    });
-  };
-
-  setTotalScore = (totalScore) => {
-    this.setState({
-      totalScore: totalScore,
     });
   };
 
@@ -178,28 +126,15 @@ export class UserProvider extends Component {
     const value = {
       user: this.state.user,
       error: this.state.error,
-      totalScore: this.state.totalScore,
       submitted: this.state.submitted,
-      language: this.state.language,
-      guess: this.state.guess,
-      words: this.state.words,
-      nextWord: this.state.nextWord,
-      setCurrWord: this.setCurrWord,
       response: this.state.response,
-      currentWord: this.state.currentWord,
       setClicked: this.setClicked,
       setError: this.setError,
       clearError: this.clearError,
       setUser: this.setUser,
       processLogin: this.processLogin,
       processLogout: this.processLogout,
-      setLanguage: this.setLanguage,
-      setWords: this.setWords,
-      setNextWord: this.setNextWord,
-      setTotalScore: this.setTotalScore,
-      setGuess: this.setGuess,
       setResponse: this.setResponse,
-      setCurrentWord: this.setCurrentWord,
     };
 
     return (
