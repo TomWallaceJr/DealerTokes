@@ -43,7 +43,7 @@ class Header extends Component {
       <header>
         <h1 className='title'>
           <Link to='/'>
-            Spanish Spaced Repetition!
+            Dealer Tokes
           </Link>
         </h1>
         {TokenService.hasAuthToken()

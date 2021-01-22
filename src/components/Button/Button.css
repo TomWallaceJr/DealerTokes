@@ -1,9 +1,11 @@
-
 Button {
     width: 150px;
     height: 70px;
-    background-color: #b20101;
+    font-size: 22px;
+    background-color: rgb(36, 40, 255);
     color: white;
-    box-shadow: 2px 3px 3px 1px grey;
+    box-shadow: 2px 3px 3px 1px rgb(255, 255, 255);
     align-self: center;
+    border-radius: 50%;
+    margin: 5px;
   }

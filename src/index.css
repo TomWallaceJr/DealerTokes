@@ -10,9 +10,9 @@ body {
   font-family: "Ubuntu", sans-serif;
   background: linear-gradient(
         90deg,
-        rgba(181, 0, 0, 0.7) 0%,
-        rgba(255, 251, 1, 0.7) 50%,
-        rgba(181, 0, 0, 0.7) 100%
+        rgba(98, 112, 240, 0.7) 0%,
+        rgba(72, 104, 131, 0.7) 50%,
+        rgba(97, 61, 228, 0.7) 100%
     );
 }
 

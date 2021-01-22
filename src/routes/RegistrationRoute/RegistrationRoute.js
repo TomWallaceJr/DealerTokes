@@ -17,9 +17,8 @@ class RegistrationRoute extends Component {
     return (
       <section>
         <h4>
-          Practice learning a language with the spaced reptition revision technique.
+          App for Poker Dealers to keep track of their income.
         </h4>
-        <h2>Sign up</h2>
         <RegistrationForm
           onRegistrationSuccess={this.handleRegistrationSuccess}
         />
