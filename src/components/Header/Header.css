@@ -9,23 +9,32 @@ header {
   nav a {
     text-decoration: none;
     color: rgb(41, 0, 224);
-    text-align: center;
+    text-align: right;
   }
 
   nav a:hover {
       background-color: black;
   }
 
-  nav {
+  .greeting-bar {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    font-size: 1.2em;
   }
-  
+
+  .greeting {
+    margin-left: 3%;
+  }
+
+  .logout-link {
+    margin-right: 3%;
+  }
   .title a {
     text-decoration: none;
     color: rgb(36, 40, 255);
     font-size: 3rem;
-    font-family: fantasy;
+    font-family: 'Lucida Grande', Verdana, sans-serif;
   }
 
   .title a:hover {
