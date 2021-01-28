@@ -3,7 +3,9 @@ import TokenService from "../../services/token-service";
 import UserContext from "../../contexts/UserContext";
 import { Link } from 'react-router-dom';
 import config from "../../config";
-import Calendar from "../../components/Calendar/Calendar";
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import './CalendarRoute.css'
 
 
 
@@ -27,7 +29,7 @@ class DashboardRoute extends Component {
 
   render() {
     return (
-      <section>
+      <section className='remove-styles'>
         <Calendar />
         <h3>BOTTOMNAVBAR COMPONENT</h3>
       </section>
