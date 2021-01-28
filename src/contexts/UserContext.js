@@ -5,6 +5,7 @@ import IdleService from '../services/idle-service'
 
 const UserContext = React.createContext({
   user: {},
+  workdays: {},
   error: null,
   response: null,
   submitted: false,
@@ -24,6 +25,7 @@ export class UserProvider extends Component {
     super(props)
     const state = {
       user: {},
+      workdays: {},
       error: null,
       response: null,
       submitted: false,
@@ -67,6 +69,10 @@ export class UserProvider extends Component {
 
   setUser = user => {
     this.setState({ user })
+  }
+
+  setWorkdays = workdays => {
+    this.setState({ workdays })
   }
 
   setResponse = (response) => {
@@ -125,6 +131,7 @@ export class UserProvider extends Component {
   render() {
     const value = {
       user: this.state.user,
+      workdays: this.state.workdays,
       error: this.state.error,
       submitted: this.state.submitted,
       response: this.state.response,
@@ -132,6 +139,7 @@ export class UserProvider extends Component {
       setError: this.setError,
       clearError: this.clearError,
       setUser: this.setUser,
+      setWorkdays: this.setWorkdays,
       processLogin: this.processLogin,
       processLogout: this.processLogout,
       setResponse: this.setResponse,

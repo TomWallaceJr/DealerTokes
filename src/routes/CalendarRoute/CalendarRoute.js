@@ -12,18 +12,14 @@ class DashboardRoute extends Component {
   async componentDidMount() {
     try {
       // instead of fetching language and words.... here we will fetch users workdays
-      const response = await fetch(`${config.API_ENDPOINT}/language`, {
+      const response = await fetch(`${config.API_ENDPOINT}/workday/${this.context.user.id}`, {
         headers: {
           authorization: `bearer ${TokenService.getAuthToken()}`,
         },
       });
       const res = await response.json();
-
-      // set context values 
-      this.context.setLanguage(res.language.name);
-      this.context.setWords(res.words);
-      console.log(res.words)
-      this.context.setTotalScore(res.language.total_score);
+      //console.log(res)
+      this.context.setWorkdays(res);
     } catch (error) {
       this.context.setError(error);
     }
