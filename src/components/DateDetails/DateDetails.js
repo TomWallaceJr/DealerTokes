@@ -10,34 +10,34 @@ export default class DateDetails extends Component {
         newWorkdaySubmitSuccess: () => { }
     }
 
-    static contextType = UserContext
     state = { error: null }
+    static contextType = UserContext
 
 
+    // I Cant get this POST request accepted. Keep gettin 400 bad Request
+    // {"error":{"message":"Missing hours in request body"}}
+    // I tried setting all values in state onchange as well as just deconstructing
+    // values 
+    // BUT SENDING SAME VALUES WORK IN POSTMAN !!! SO IT CANT BE ON SERVER SIDE HAS TO BE HERE!
     handleSubmit = e => {
         e.preventDefault();
-        console.log(this.context.user.id)
-        // get correct date format
-        // function getCurrentDateTimeMySql() {
-        //     var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
-        //     var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, 19).replace('T', ' ');
-        //     var mySqlDT = localISOTime;
-        //     return mySqlDT;
-        // }
-        // let date = getCurrentDateTimeMySql()
-
-        const { date, hours, downs, tokes, notes } = e.target;
-        WorkdayApiService.postNewWorkday({
+        // these are fine
+        console.log(e.target.hours.value)
+        console.log(e.target.downs.value)
+        console.log(e.target.tokes.value)
+        console.log(e.target.notes.value)
+        const { hours, downs, tokes, notes } = e.target;
+        const newWorkday = {
             date: this.props.date,
             hours: hours.value,
             downs: downs.value,
             tokes: tokes.value,
             notes: notes.value,
             user_id: this.context.user.id
-        })
+        }
+        WorkdayApiService.postNewWorkday(newWorkday)
             .then(workday => {
-                console.log('inside .then')
-                date.value = ''
+                console.log('inside .then workday - ', workday)
                 hours.value = ''
                 downs.value = ''
                 tokes.value = ''
@@ -49,8 +49,30 @@ export default class DateDetails extends Component {
             })
     }
 
+    // these funcs were just when tried to use state values to send in PoST request
+    // keeping in case i try again
+    // handleHoursChange = e => {
+    //     e.preventDefault();
+    //     this.setState({ hours: e.currentTarget.value })
+    // }
+
+    // handleDownsChange = e => {
+    //     e.preventDefault();
+    //     this.setState({ downs: e.currentTarget.value })
+    // }
+
+    // handleTokesChange = e => {
+    //     e.preventDefault();
+    //     this.setState({ tokes: e.currentTarget.value })
+    // }
+
+    // handleNotesChange = e => {
+    //     e.preventDefault();
+    //     this.setState({ notes: e.currentTarget.value })
+    // }
+
     render() {
-        const { error } = this.state
+        //const { error } = this.state
         return (
             <form
                 className='new-workday-form'
@@ -60,43 +82,44 @@ export default class DateDetails extends Component {
                     {error && <p>{error}</p>}
                 </div> */}
                 <div>
-                    <Label htmlFor='date-input'>Date</Label>
-                    <Input
+                    <Label htmlFor='date-input'>Date: {this.props.date.date}</Label>
+
+                    {/* <Input
                         defaultValue={this.props.date}
                         readOnly
-                        id='date'
+                        id='date-input'
                         name='date'
                         required
-                    />
+                    /> */}
                 </div>
                 <div>
-                    <Label htmlFor='hours'>Hours Worked</Label>
+                    <Label htmlFor='hours-input'>Hours Worked</Label>
                     <Input
-                        id='hours'
+                        id='hours-input'
                         name='hours'
                         required
                     />
                 </div>
                 <div>
-                    <Label htmlFor='downs'>Downs Dealt</Label>
+                    <Label htmlFor='downs-input'>Downs Dealt</Label>
                     <Input
-                        id='downs'
+                        id='downs-input'
                         name='downs'
                         required
                     />
                 </div>
                 <div>
-                    <Label htmlFor='tokes'>Tokes Earned</Label>
+                    <Label htmlFor='tokes-input'>Tokes Earned</Label>
                     <Input
-                        id='tokes'
+                        id='tokes-input'
                         name='tokes'
                         required
                     />
                 </div>
                 <div>
-                    <Label htmlFor='notes'>Notes</Label>
+                    <Label htmlFor='notes-input'>Notes</Label>
                     <Textarea
-                        id='notes'
+                        id='notes-input'
                         name='notes'
                     />
                 </div>

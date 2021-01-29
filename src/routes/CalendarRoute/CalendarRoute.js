@@ -35,6 +35,7 @@ class DashboardRoute extends Component {
   }
 
   onChange = date => this.setState({ date })
+  onClickDay = date => this.setState({ date })
 
   render() {
     return (
@@ -42,7 +43,7 @@ class DashboardRoute extends Component {
         <Calendar
           minDetail='year'
           onChange={this.onChange}
-          value={this.state.date}
+          onClick={this.onClickDay}
         />
         {this.state.date ? <DateDetails
           date={this.state.date}
