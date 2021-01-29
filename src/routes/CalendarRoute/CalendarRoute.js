@@ -6,11 +6,16 @@ import config from "../../config";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './CalendarRoute.css'
+import DateDetails from "../../components/DateDetails/DateDetails";
 
 
 
 class DashboardRoute extends Component {
   static contextType = UserContext;
+
+  state = {
+    date: null
+  }
 
   async componentDidMount() {
     try {
@@ -27,11 +32,19 @@ class DashboardRoute extends Component {
     }
   }
 
+  onChange = date => this.setState({ date })
+
   render() {
     return (
       <section className='remove-styles'>
-        <Calendar />
-        <h3>BOTTOMNAVBAR COMPONENT</h3>
+        <Calendar
+          minDetail='year'
+          onChange={this.onChange}
+          value={this.state.date}
+        />
+        {this.state.date ? <DateDetails
+          date={this.state.date}
+        /> : null}
       </section>
     );
   }
