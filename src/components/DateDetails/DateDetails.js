@@ -29,12 +29,13 @@ export default class DateDetails extends Component {
         const { hours, downs, tokes, notes } = e.target;
         const newWorkday = {
             date: this.props.date,
-            hours: hours.value,
-            downs: downs.value,
-            tokes: tokes.value,
-            notes: notes.value,
+            hours: e.target.hours.value,
+            downs: e.target.downs.value,
+            tokes: e.target.tokes.value,
+            notes: e.target.notes.value,
             user_id: this.context.user.id
         }
+        console.log('newWorkday -', newWorkday)
         WorkdayApiService.postNewWorkday(newWorkday)
             .then(workday => {
                 console.log('inside .then workday - ', workday)
@@ -84,13 +85,12 @@ export default class DateDetails extends Component {
                 <div>
                     <Label htmlFor='date-input'>Date: {this.props.date.date}</Label>
 
-                    {/* <Input
+                    <Input
                         defaultValue={this.props.date}
-                        readOnly
                         id='date-input'
                         name='date'
                         required
-                    /> */}
+                    />
                 </div>
                 <div>
                     <Label htmlFor='hours-input'>Hours Worked</Label>
