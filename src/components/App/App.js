@@ -7,6 +7,7 @@ import RegistrationRoute from '../../routes/RegistrationRoute/RegistrationRoute'
 import LoginRoute from '../../routes/LoginRoute/LoginRoute'
 import CalendarRoute from '../../routes/CalendarRoute/CalendarRoute'
 import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute'
+import UserContext from '../../contexts/UserContext'
 
 
 export default class App extends Component {
@@ -21,6 +22,7 @@ export default class App extends Component {
     const { hasError } = this.state
     return (
       <div className='App'>
+
         <Header />
         <main>
           {hasError && (

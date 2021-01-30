@@ -13,6 +13,7 @@ const UserContext = React.createContext({
   setError: () => { },
   clearError: () => { },
   setUser: () => { },
+  setWorkdays: () => { },
   processLogin: () => { },
   processLogout: () => { },
   setClicked: () => { },
