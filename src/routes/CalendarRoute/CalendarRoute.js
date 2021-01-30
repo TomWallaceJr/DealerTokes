@@ -13,9 +13,14 @@ import DateDetails from "../../components/DateDetails/DateDetails";
 class CalendarRoute extends Component {
   static contextType = UserContext;
 
-  state = {
-    date: null
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: null,
+      workdays: []
+    }
   }
+
 
   componentDidMount() {
     fetch(`${config.API_ENDPOINT}/workday/${this.context.user.id}`, {
@@ -24,18 +29,55 @@ class CalendarRoute extends Component {
       },
     })
       .then(res => res.json())
-      .then(res => this.context.setWorkdays(res))
+      .then(res => {
+        this.context.setWorkdays(res);
+        this.setState({
+          workdays: res
+        })
+      })
+  }
+
+  // componentDidUpdate() {
+  //   fetch(`${config.API_ENDPOINT}/workday/${this.context.user.id}`, {
+  //     headers: {
+  //       authorization: `bearer ${TokenService.getAuthToken()}`,
+  //     },
+  //   })
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       this.context.setWorkdays(res)
+  //       this.setState({
+  //         workdays: res
+  //       })
+  //     })
+  // }
+
+  populateWorkdays = () => {
+    fetch(`${config.API_ENDPOINT}/workday/${this.context.user.id}`, {
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        this.context.setWorkdays(res);
+        this.setState({
+          workdays: res,
+        })
+      })
+    console.log('context -', this.context.workdays)
+    console.log('state -', this.state.workdays)
   }
 
   findTokesByDate = date => {
 
-    console.log(this.context)
-    // let thisDay = this.context.workdays.find(day => day.date === date);
-    // let tokes = thisDay.tokes;
-    // return tokes
+    console.log(this.state.workdays)
+    let thisDay = (this.state.workdays).find(day => day.date === date);
+    console.log(thisDay)
+    return 'w'
   }
 
-  onChange = date => this.setState({ date })
+  onClick = date => this.setState({ date })
   // somehow get current dates Tokes value to display here
   // Use a .find method on this.context.workdays to find the workday with current date
   tileContent = ({ date, view }) => view === 'month' ? this.findTokesByDate(date) : null
@@ -47,10 +89,11 @@ class CalendarRoute extends Component {
         <section className='cal'>
           <Calendar
             minDetail='year'
-            onChange={this.onChange}
+            onClickDay={this.onClick}
             tileContent={this.tileContent}
           />
         </section>
+        <button type='button' onClick={this.populateWorkdays}>Get Data</button>
         <section>
           {this.state.date ? <DateDetails
             date={this.state.date}
