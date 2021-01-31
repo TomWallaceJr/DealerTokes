@@ -1,3 +1,7 @@
-.cal button{
+.cal-container button{
     border: solid 1px black;
+}
+
+.cal {
+    margin: auto;
 }

@@ -7,23 +7,12 @@ import './Header.css'
 class Header extends Component {
   static contextType = UserContext
 
-  handleLogoutClick = () => {
-    this.context.processLogout()
-  }
-
   renderLogoutLink() {
     return (
       <div className='greeting-bar'>
         <span className='greeting'>
           Hello {this.context.user.name}!
         </span>
-        <nav className='logout-link'>
-          <Link
-            onClick={this.handleLogoutClick}
-            to='/login'>
-            Logout
-          </Link>
-        </nav>
       </div>
     )
   }

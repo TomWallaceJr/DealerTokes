@@ -45,6 +45,9 @@ class CalendarRoute extends Component {
       .then(res => this.context.setWorkdays(res))
   }
 
+  handleLogoutClick = () => {
+    this.context.processLogout()
+  }
 
 
 
@@ -64,11 +67,12 @@ class CalendarRoute extends Component {
   render() {
     return (
       <>
-        <section className='cal'>
+        <section className='cal-container'>
           <Calendar
             minDetail='year'
             onClickDay={this.onClick}
             tileContent={this.tileContent}
+            className='cal'
           />
         </section>
         {/* <button type='button' onClick={this.populateWorkdays}>Get Data</button> */}

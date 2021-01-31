@@ -19,8 +19,7 @@ header {
   .greeting-bar {
     display: flex;
     justify-content: space-between;
-    background-color: white;
-    font-size: 1.2em;
+    font-size: 1.3em;
   }
 
   .greeting {
