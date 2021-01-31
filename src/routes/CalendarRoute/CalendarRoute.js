@@ -10,71 +10,44 @@ import DateDetails from "../../components/DateDetails/DateDetails";
 
 
 
-class CalendarRoute extends Component {
-  static contextType = UserContext;
 
+class CalendarRoute extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      date: null,
-      workdays: []
-    }
+    this.handleLoad = this.handleLoad.bind(this);
   }
+  static contextType = UserContext;
 
+  state = {
+    date: null,
+  }
 
   componentDidMount() {
+    window.addEventListener('load', this.handleLoad);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('load', this.handleLoad)
+  }
+
+  handleLoad() {
     fetch(`${config.API_ENDPOINT}/workday/${this.context.user.id}`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     })
       .then(res => res.json())
-      .then(res => {
-        this.context.setWorkdays(res);
-        this.setState({
-          workdays: res
-        })
-      })
+      .then(res => this.context.setWorkdays(res))
   }
 
-  // componentDidUpdate() {
-  //   fetch(`${config.API_ENDPOINT}/workday/${this.context.user.id}`, {
-  //     headers: {
-  //       authorization: `bearer ${TokenService.getAuthToken()}`,
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       this.context.setWorkdays(res)
-  //       this.setState({
-  //         workdays: res
-  //       })
-  //     })
-  // }
 
-  populateWorkdays = () => {
-    fetch(`${config.API_ENDPOINT}/workday/${this.context.user.id}`, {
-      headers: {
-        authorization: `bearer ${TokenService.getAuthToken()}`,
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        this.context.setWorkdays(res);
-        this.setState({
-          workdays: res,
-        })
-      })
-    console.log('context -', this.context.workdays)
-    console.log('state -', this.state.workdays)
-  }
+
 
   findTokesByDate = date => {
-
-    console.log(this.state.workdays)
-    let thisDay = (this.state.workdays).find(day => day.date === date);
-    console.log(thisDay)
-    return 'w'
+    let formattedDate = date.toISOString().split('T')[0]
+    console.log('context user -', this.context.user)
+    console.log('context workdays -', this.context.workdays)
+    //this.context.workdays.find(workday => workday.date === formattedDate)
   }
 
   onClick = date => this.setState({ date })
@@ -93,7 +66,7 @@ class CalendarRoute extends Component {
             tileContent={this.tileContent}
           />
         </section>
-        <button type='button' onClick={this.populateWorkdays}>Get Data</button>
+        {/* <button type='button' onClick={this.populateWorkdays}>Get Data</button> */}
         <section>
           {this.state.date ? <DateDetails
             date={this.state.date}

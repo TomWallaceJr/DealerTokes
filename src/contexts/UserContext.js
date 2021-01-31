@@ -30,6 +30,7 @@ export class UserProvider extends Component {
       error: null,
       response: null,
       submitted: false,
+      // value: localStorage.getItem("parentValueKey")
     }
 
     const jwtPayload = TokenService.parseAuthToken()
@@ -44,6 +45,12 @@ export class UserProvider extends Component {
     this.state = state;
     IdleService.setIdleCallback(this.logoutBecauseIdle)
   }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.state.value !== prevState.value) {
+  //     // Whatever storage mechanism you end up deciding to use.
+  //     localStorage.setItem("parentValueKey", this.state.value)
+  //   }
+  // }
 
   componentDidMount() {
     if (TokenService.hasAuthToken()) {

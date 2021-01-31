@@ -18,8 +18,8 @@ const WorkdayApiService = {
             )
     },
 
-    getWorkdayDataByDate(date) {
-        fetch(`${config.API_ENDPOINT}/workday/${this.context.user_id}/date/${date}`, {
+    getTokesByDate(date, userId) {
+        fetch(`${config.API_ENDPOINT}/workday/${userId}/date/${date}`, {
             headers: {
                 authorization: `bearer ${TokenService.getAuthToken()}`,
             },
@@ -29,7 +29,7 @@ const WorkdayApiService = {
                     ? res.json().then(e => Promise.reject(e))
                     : res.json()
             )
-            .then(res => console.log(res))
+        // .then(res => console.log('response -', res.tokes))
     }
 }
 
