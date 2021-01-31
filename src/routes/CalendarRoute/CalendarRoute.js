@@ -7,6 +7,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './CalendarRoute.css';
 import DateDetails from "../../components/DateDetails/DateDetails";
+import BottomNavBar from "../../components/BottomNavBar/BottomNavBar";
 
 
 
@@ -23,6 +24,10 @@ class CalendarRoute extends Component {
   }
 
   componentDidMount() {
+    window.addEventListener('load', this.handleLoad);
+  }
+
+  componentDidUpdate() {
     window.addEventListener('load', this.handleLoad);
   }
 
@@ -72,6 +77,7 @@ class CalendarRoute extends Component {
             date={this.state.date}
             onChange={this.onChange}
           /> : null}
+          <BottomNavBar />
         </section>
       </>
     );
