@@ -31,27 +31,22 @@ class DashRoute extends Component {
       .then(res => this.context.setLoading())
   }
 
+  // returns current days tokes
   findTokesByDate = date => {
     let daysTokes = null;
     let formattedDate = date.toISOString().split('T')[0]
-    // console.log('context -', this.context)
-    //console.log(this.context.workdays)
-    //console.log(this.context.workdays[0].date.split('T')[0], formattedDate)
     this.context.workdays.find(workday => {
-
-      // console.log(workday.date.split('T')[0])
-      // console.log(formattedDate)
       if (workday.date.split('T')[0] === formattedDate) {
-        console.log(workday.tokes)
         daysTokes = workday.tokes
       }
     })
-    return daysTokes
+    if (daysTokes)
+      return <p>${daysTokes}</p>
   }
 
   onClickDay = date => this.setState({ date })
 
-  // Renders that dates tokes for each date
+  // titleContent is called for each day on calendar
   tileContent = ({ date, view }) => view === 'month' && this.findTokesByDate(date)
 
 

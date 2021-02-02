@@ -39,7 +39,7 @@ export default function BottomNavBar() {
                 className='footer'
             >
                 <BottomNavigationAction label="Calendar" icon={<CalendarTodayIcon />} component={Link} to='/' />
-                <BottomNavigationAction label="Statements" icon={<ListIcon />} />
+                <BottomNavigationAction label="Statements" icon={<ListIcon />} component={Link} to='/statements' />
                 <BottomNavigationAction label="Log Out" icon={<ExitToAppIcon />} onClick={handleLogoutClick} />
             </BottomNavigation>
         </footer>

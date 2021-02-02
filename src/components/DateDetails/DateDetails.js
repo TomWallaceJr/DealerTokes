@@ -26,7 +26,6 @@ export default class DateDetails extends Component {
         }
         WorkdayApiService.postNewWorkday(newWorkday)
             .then(workday => {
-                console.log('inside .then workday - ', workday)
                 hours.value = ''
                 downs.value = ''
                 tokes.value = ''
@@ -36,7 +35,7 @@ export default class DateDetails extends Component {
             .catch(res => {
                 this.setState({ error: res.error })
             })
-        //this.props.history.push('/')
+        window.location.reload()
     }
 
     render() {

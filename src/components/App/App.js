@@ -7,6 +7,7 @@ import RegistrationRoute from '../../routes/RegistrationRoute/RegistrationRoute'
 import LoginRoute from '../../routes/LoginRoute/LoginRoute'
 import DashRoute from '../../routes/DashRoute/DashRoute'
 import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute'
+import StatementsRoute from '../../routes/StatementsRoute/StatementsRoute'
 import UserContext from '../../contexts/UserContext'
 
 
@@ -33,6 +34,11 @@ export default class App extends Component {
               exact
               path={'/'}
               component={DashRoute}
+            />
+            <PrivateRoute
+              exact
+              path={'/statements'}
+              component={StatementsRoute}
             />
             <PublicOnlyRoute
               path={'/register'}
