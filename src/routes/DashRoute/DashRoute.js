@@ -13,10 +13,6 @@ import BottomNavBar from "../../components/BottomNavBar/BottomNavBar";
 
 
 class DashRoute extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.handleLoad = this.handleLoad.bind(this);
-  // }
   static contextType = UserContext;
 
   state = {
@@ -35,31 +31,29 @@ class DashRoute extends Component {
       .then(res => this.context.setLoading())
   }
 
-
-
-
   findTokesByDate = date => {
-
+    let daysTokes = null;
     let formattedDate = date.toISOString().split('T')[0]
     // console.log('context -', this.context)
-    // console.log('context workdays -', this.context.workdays)
-    console.log(this.context.workdays)
-    return this.context.workdays[0].tokes
-    // this.context.workdays.find(workday => {
-    //   if (workday.date === formattedDate)
-    //     return workday.tokes
-    // })
+    //console.log(this.context.workdays)
+    //console.log(this.context.workdays[0].date.split('T')[0], formattedDate)
+    this.context.workdays.find(workday => {
+
+      // console.log(workday.date.split('T')[0])
+      // console.log(formattedDate)
+      if (workday.date.split('T')[0] === formattedDate) {
+        console.log(workday.tokes)
+        daysTokes = workday.tokes
+      }
+    })
+    return daysTokes
   }
 
   onClickDay = date => this.setState({ date })
-  // somehow get current dates Tokes value to display here
-  // Use a .find method on this.context.workdays to find the workday with current date
-  tileContent = ({ date, view }) => {
 
-    // this console log context here shows this.context.users populated but this.context.workdays is not
-    //console.log('tile content -', this.context)
-    return view === 'month' && this.findTokesByDate(date)
-  }
+  // Renders that dates tokes for each date
+  tileContent = ({ date, view }) => view === 'month' && this.findTokesByDate(date)
+
 
 
   render() {
