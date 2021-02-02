@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import AuthApiService from '../services/auth-api-service'
 import TokenService from '../services/token-service'
 import IdleService from '../services/idle-service'
+import config from '../config'
 
 const UserContext = React.createContext({
   user: {},
-  workdays: {},
+  workdays: [],
   error: null,
-  response: null,
+  loading: true,
   submitted: false,
-  setResponse: () => { },
+  setLoading: () => { },
   setError: () => { },
   clearError: () => { },
   setUser: () => { },
@@ -26,9 +27,9 @@ export class UserProvider extends Component {
     super(props)
     const state = {
       user: {},
-      workdays: {},
+      workdays: [],
       error: null,
-      response: null,
+      loading: true,
       submitted: false,
       // value: localStorage.getItem("parentValueKey")
     }
@@ -36,15 +37,20 @@ export class UserProvider extends Component {
     const jwtPayload = TokenService.parseAuthToken()
 
     // since user is persisting but workdays is not lets try storing it here
-    if (jwtPayload)
+    if (jwtPayload) {
       state.user = {
         id: jwtPayload.user_id,
         name: jwtPayload.name,
         username: jwtPayload.sub,
       }
-    // state.workdays = {
-    //   workdays: jwtPayload.workdays
-    // }
+      // fetch(`${config.API_ENDPOINT}/workday/${jwtPayload.user_id}`, {
+      //   headers: {
+      //     authorization: `bearer ${TokenService.getAuthToken()}`,
+      //   },
+      // })
+      //   .then(res => res.json())
+      //   .then(res => state.workdays = { res })
+    }
 
     this.state = state;
     IdleService.setIdleCallback(this.logoutBecauseIdle)
@@ -87,9 +93,9 @@ export class UserProvider extends Component {
     this.setState({ workdays })
   }
 
-  setResponse = (response) => {
+  setLoading = () => {
     this.setState({
-      response: response,
+      loading: !this.state.loading,
     });
   };
 
@@ -146,7 +152,7 @@ export class UserProvider extends Component {
       workdays: this.state.workdays,
       error: this.state.error,
       submitted: this.state.submitted,
-      response: this.state.response,
+      loading: this.state.loading,
       setClicked: this.setClicked,
       setError: this.setError,
       clearError: this.clearError,
@@ -154,7 +160,7 @@ export class UserProvider extends Component {
       setWorkdays: this.setWorkdays,
       processLogin: this.processLogin,
       processLogout: this.processLogout,
-      setResponse: this.setResponse,
+      setLoading: this.setLoading,
     };
 
     return (

@@ -21,22 +21,10 @@ class DashRoute extends Component {
 
   state = {
     date: null,
-    workdays: {}
   }
 
-  // componentDidMount() {
-  //   window.addEventListener('load', this.handleLoad);
-  // }
-
-  // componentDidUpdate() {
-  //   window.addEventListener('load', this.handleLoad);
-  // }
-
-  // componentWillUnmount() {
-  //   window.removeEventListener('load', this.handleLoad)
-  // }
-
   componentDidMount() {
+    //console.log('component mounting')
     fetch(`${config.API_ENDPOINT}/workday/${this.context.user.id}`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
@@ -44,7 +32,7 @@ class DashRoute extends Component {
     })
       .then(res => res.json())
       .then(res => this.context.setWorkdays(res))
-      .then(res => console.log('component did mount -', this.context))
+      .then(res => this.context.setLoading())
   }
 
 
@@ -53,9 +41,10 @@ class DashRoute extends Component {
   findTokesByDate = date => {
 
     let formattedDate = date.toISOString().split('T')[0]
-    //console.log('context user -', this.context.user)
-    //console.log('context workdays -', this.context.workdays)
-    return 'y'
+    // console.log('context -', this.context)
+    // console.log('context workdays -', this.context.workdays)
+    console.log(this.context.workdays)
+    return this.context.workdays[0].tokes
     // this.context.workdays.find(workday => {
     //   if (workday.date === formattedDate)
     //     return workday.tokes
@@ -66,17 +55,15 @@ class DashRoute extends Component {
   // somehow get current dates Tokes value to display here
   // Use a .find method on this.context.workdays to find the workday with current date
   tileContent = ({ date, view }) => {
+
     // this console log context here shows this.context.users populated but this.context.workdays is not
-    console.log('tile content -', this.context)
-    if (view === 'month') {
-      this.findTokesByDate(date)
-    } else {
-      return null
-    }
+    //console.log('tile content -', this.context)
+    return view === 'month' && this.findTokesByDate(date)
   }
 
 
   render() {
+    if (this.context.loading) return <p>Loading...</p>
     return (
       <>
         <section className='cal-container'>
