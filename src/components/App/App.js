@@ -5,7 +5,7 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import PublicOnlyRoute from '../PublicOnlyRoute/PublicOnlyRoute'
 import RegistrationRoute from '../../routes/RegistrationRoute/RegistrationRoute'
 import LoginRoute from '../../routes/LoginRoute/LoginRoute'
-import CalendarRoute from '../../routes/CalendarRoute/CalendarRoute'
+import DashRoute from '../../routes/DashRoute/DashRoute'
 import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute'
 import UserContext from '../../contexts/UserContext'
 
@@ -32,7 +32,7 @@ export default class App extends Component {
             <PrivateRoute
               exact
               path={'/'}
-              component={CalendarRoute}
+              component={DashRoute}
             />
             <PublicOnlyRoute
               path={'/register'}

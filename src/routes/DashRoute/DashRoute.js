@@ -5,37 +5,38 @@ import UserContext from "../../contexts/UserContext";
 import config from "../../config";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import './CalendarRoute.css';
+import './DashRoute.css';
 import DateDetails from "../../components/DateDetails/DateDetails";
 import BottomNavBar from "../../components/BottomNavBar/BottomNavBar";
 
 
 
 
-class CalendarRoute extends Component {
-  constructor(props) {
-    super(props);
-    this.handleLoad = this.handleLoad.bind(this);
-  }
+class DashRoute extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.handleLoad = this.handleLoad.bind(this);
+  // }
   static contextType = UserContext;
 
   state = {
     date: null,
+    workdays: {}
   }
+
+  // componentDidMount() {
+  //   window.addEventListener('load', this.handleLoad);
+  // }
+
+  // componentDidUpdate() {
+  //   window.addEventListener('load', this.handleLoad);
+  // }
+
+  // componentWillUnmount() {
+  //   window.removeEventListener('load', this.handleLoad)
+  // }
 
   componentDidMount() {
-    window.addEventListener('load', this.handleLoad);
-  }
-
-  componentDidUpdate() {
-    window.addEventListener('load', this.handleLoad);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('load', this.handleLoad)
-  }
-
-  handleLoad() {
     fetch(`${config.API_ENDPOINT}/workday/${this.context.user.id}`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
@@ -43,25 +44,36 @@ class CalendarRoute extends Component {
     })
       .then(res => res.json())
       .then(res => this.context.setWorkdays(res))
+      .then(res => console.log('component did mount -', this.context))
   }
 
-  handleLogoutClick = () => {
-    this.context.processLogout()
-  }
 
 
 
   findTokesByDate = date => {
+
     let formattedDate = date.toISOString().split('T')[0]
-    console.log('context user -', this.context.user)
-    console.log('context workdays -', this.context.workdays)
-    //this.context.workdays.find(workday => workday.date === formattedDate)
+    //console.log('context user -', this.context.user)
+    //console.log('context workdays -', this.context.workdays)
+    return 'y'
+    // this.context.workdays.find(workday => {
+    //   if (workday.date === formattedDate)
+    //     return workday.tokes
+    // })
   }
 
-  onClick = date => this.setState({ date })
+  onClickDay = date => this.setState({ date })
   // somehow get current dates Tokes value to display here
   // Use a .find method on this.context.workdays to find the workday with current date
-  tileContent = ({ date, view }) => view === 'month' ? this.findTokesByDate(date) : null
+  tileContent = ({ date, view }) => {
+    // this console log context here shows this.context.users populated but this.context.workdays is not
+    console.log('tile content -', this.context)
+    if (view === 'month') {
+      this.findTokesByDate(date)
+    } else {
+      return null
+    }
+  }
 
 
   render() {
@@ -70,24 +82,21 @@ class CalendarRoute extends Component {
         <section className='cal-container'>
           <Calendar
             minDetail='year'
-            onClickDay={this.onClick}
+            onClickDay={this.onClickDay}
             tileContent={this.tileContent}
             className='cal'
           />
         </section>
-        {/* <button type='button' onClick={this.populateWorkdays}>Get Data</button> */}
         <section>
           {this.state.date ? <DateDetails
             date={this.state.date}
             onChange={this.onChange}
           /> : null}
-          <BottomNavBar />
         </section>
+        <BottomNavBar />
       </>
     );
   }
 }
 
-//CalendarRoute.contextType = UserContext
-
-export default CalendarRoute;
+export default DashRoute;

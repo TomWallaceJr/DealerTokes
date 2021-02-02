@@ -35,12 +35,16 @@ export class UserProvider extends Component {
 
     const jwtPayload = TokenService.parseAuthToken()
 
+    // since user is persisting but workdays is not lets try storing it here
     if (jwtPayload)
       state.user = {
         id: jwtPayload.user_id,
         name: jwtPayload.name,
         username: jwtPayload.sub,
       }
+    // state.workdays = {
+    //   workdays: jwtPayload.workdays
+    // }
 
     this.state = state;
     IdleService.setIdleCallback(this.logoutBecauseIdle)
