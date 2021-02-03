@@ -102,7 +102,7 @@ class DashRoute extends Component {
                         year={this.state.year} /> : null}
                 </section> */}
 
-                <h3 className='message'></h3>
+
                 <BottomNavBar />
             </>
         );

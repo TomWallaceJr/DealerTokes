@@ -16,7 +16,6 @@ const useStyles = makeStyles({
 });
 
 export default function BottomNavBar() {
-    const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
     const Context = useContext(UserContext);
@@ -29,7 +28,7 @@ export default function BottomNavBar() {
         <footer className='nav-footer'>
             <BottomNavigation
                 value={value}
-                onChange={(event, newValue) => {
+                onChange={(newValue) => {
                     setValue(newValue);
                 }}
                 showLabels
