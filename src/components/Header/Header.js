@@ -1,21 +1,21 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import TokenService from '../../services/token-service'
-import UserContext from '../../contexts/UserContext'
-import './Header.css'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import TokenService from '../../services/token-service';
+import UserContext from '../../contexts/UserContext';
+import './Header.css';
 
 class Header extends Component {
-  static contextType = UserContext
+  static contextType = UserContext;
 
-  renderLogoutLink() {
+  renderGreeting() {
     return (
       <div className='greeting-bar'>
-        <span className='greeting'>
+        <h2 className='greeting'>
           Hello {this.context.user.name}!
-        </span>
+        </h2>
       </div>
-    )
-  }
+    );
+  };
 
   renderLoginLink() {
     return (
@@ -31,19 +31,19 @@ class Header extends Component {
           <Link to='/register'>Sign up</Link>
         </nav>
       </>
-    )
-  }
+    );
+  };
 
   render() {
     return (
       <header>
 
         {TokenService.hasAuthToken()
-          ? this.renderLogoutLink()
+          ? this.renderGreeting()
           : this.renderLoginLink()}
       </header>
     );
-  }
-}
+  };
+};
 
-export default Header
+export default Header;

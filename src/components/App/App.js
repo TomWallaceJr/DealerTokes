@@ -1,29 +1,28 @@
-import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import Header from '../Header/Header'
-import PrivateRoute from '../PrivateRoute/PrivateRoute'
-import PublicOnlyRoute from '../PublicOnlyRoute/PublicOnlyRoute'
-import RegistrationRoute from '../../routes/RegistrationRoute/RegistrationRoute'
-import LoginRoute from '../../routes/LoginRoute/LoginRoute'
-import DashRoute from '../../routes/DashRoute/DashRoute'
-import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute'
-import StatementsRoute from '../../routes/StatementsRoute/StatementsRoute'
-import UserContext from '../../contexts/UserContext'
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Header from '../Header/Header';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import PublicOnlyRoute from '../PublicOnlyRoute/PublicOnlyRoute';
+import RegistrationRoute from '../../routes/RegistrationRoute/RegistrationRoute';
+import LoginRoute from '../../routes/LoginRoute/LoginRoute';
+import DashRoute from '../../routes/DashRoute/DashRoute';
+import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute';
+import StatementsRoute from '../../routes/StatementsRoute/StatementsRoute';
+
 
 
 export default class App extends Component {
-  state = { hasError: false }
+  state = { hasError: false };
 
   static getDerivedStateFromError(error) {
-    console.error(error)
-    return { hasError: true }
-  }
+    //console.error(error)
+    return { hasError: true };
+  };
 
   render() {
-    const { hasError } = this.state
+    const { hasError } = this.state;
     return (
       <div className='App'>
-
         <Header />
         <main>
           {hasError && (
@@ -55,5 +54,5 @@ export default class App extends Component {
         </main>
       </div>
     );
-  }
-}
+  };
+};

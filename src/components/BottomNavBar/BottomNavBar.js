@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListIcon from '@material-ui/icons/List';
-import UserContext from '../../contexts/UserContext'
+import UserContext from '../../contexts/UserContext';
 import { Link } from 'react-router-dom';
 import './BottomNavBar.css';
 
@@ -15,21 +15,18 @@ const useStyles = makeStyles({
     },
 });
 
-
-
 export default function BottomNavBar() {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
-
-    const Context = useContext(UserContext)
+    const Context = useContext(UserContext);
 
     const handleLogoutClick = () => {
         Context.processLogout()
-    }
+    };
 
     return (
-        <footer>
+        <footer className='nav-footer'>
             <BottomNavigation
                 value={value}
                 onChange={(event, newValue) => {
@@ -44,4 +41,4 @@ export default function BottomNavBar() {
             </BottomNavigation>
         </footer>
     );
-}
+};

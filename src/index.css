@@ -4,20 +4,25 @@
   padding: 0;
 }
 
-.remove-styles {
-  all: revert;
+#root {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 50px;
 }
+
+
+ 
 
 body {
   margin: 0;
   padding: 0;
   font-family: "Ubuntu", sans-serif;
-  background: linear-gradient(
-        90deg,
-        rgba(98, 112, 240, 0.7) 0%,
-        rgba(72, 104, 131, 0.7) 50%,
-        rgba(97, 61, 228, 0.7) 100%
-    );
+  background: url(images/pexels-nick-rtr-3187173.jpg) center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: white;
 }
 
 section {

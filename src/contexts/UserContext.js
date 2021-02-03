@@ -11,6 +11,7 @@ const UserContext = React.createContext({
   loading: true,
   submitted: false,
   setLoading: () => { },
+  setSubmitted: () => { },
   setError: () => { },
   clearError: () => { },
   setUser: () => { },
@@ -31,36 +32,24 @@ export class UserProvider extends Component {
       error: null,
       loading: true,
       submitted: false,
-      // value: localStorage.getItem("parentValueKey")
     }
 
     const jwtPayload = TokenService.parseAuthToken()
 
-    // since user is persisting but workdays is not lets try storing it here
+
     if (jwtPayload) {
       state.user = {
         id: jwtPayload.user_id,
         name: jwtPayload.name,
         username: jwtPayload.sub,
       }
-      // fetch(`${config.API_ENDPOINT}/workday/${jwtPayload.user_id}`, {
-      //   headers: {
-      //     authorization: `bearer ${TokenService.getAuthToken()}`,
-      //   },
-      // })
-      //   .then(res => res.json())
-      //   .then(res => state.workdays = { res })
+
     }
 
     this.state = state;
     IdleService.setIdleCallback(this.logoutBecauseIdle)
   }
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.value !== prevState.value) {
-  //     // Whatever storage mechanism you end up deciding to use.
-  //     localStorage.setItem("parentValueKey", this.state.value)
-  //   }
-  // }
+
 
   componentDidMount() {
     if (TokenService.hasAuthToken()) {
@@ -94,10 +83,17 @@ export class UserProvider extends Component {
   }
 
   setLoading = () => {
+    console.log('set laoding')
     this.setState({
-      loading: !this.state.loading,
+      loading: !this.state.loading
     });
   };
+
+  setSubmitted = () => {
+    this.setState({
+      submitted: !this.state.submitted
+    })
+  }
 
   setClicked = (t) => {
     this.setState({
@@ -161,6 +157,7 @@ export class UserProvider extends Component {
       processLogin: this.processLogin,
       processLogout: this.processLogout,
       setLoading: this.setLoading,
+      setSubmitted: this.setSubmitted
     };
 
     return (

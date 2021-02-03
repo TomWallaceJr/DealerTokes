@@ -31,6 +31,6 @@ const WorkdayApiService = {
             )
         // .then(res => console.log('response -', res.tokes))
     }
-}
+};
 
-export default WorkdayApiService
+export default WorkdayApiService;

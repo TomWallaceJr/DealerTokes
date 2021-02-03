@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import TokenService from "../../services/token-service";
-import WorkdayApiService from '../../services/workday-api-service';
 import UserContext from "../../contexts/UserContext";
 import config from "../../config";
 import Calendar from 'react-calendar';
@@ -17,10 +16,11 @@ class DashRoute extends Component {
 
   state = {
     date: null,
-  }
+    contextUpdated: false
+  };
 
   componentDidMount() {
-    //console.log('component mounting')
+    console.log('component mounting')
     fetch(`${config.API_ENDPOINT}/workday/${this.context.user.id}`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
@@ -29,6 +29,12 @@ class DashRoute extends Component {
       .then(res => res.json())
       .then(res => this.context.setWorkdays(res))
       .then(res => this.context.setLoading())
+      // .then(res => this.context.setLoading())
+      .then(res => this.setState({ contextUpdated: true }))
+  }
+
+  componentWillUnmount() {
+    this.context.setLoading()
   }
 
   // returns current days tokes
@@ -52,6 +58,7 @@ class DashRoute extends Component {
 
 
   render() {
+    console.log(this.context.loading)
     if (this.context.loading) return <p>Loading...</p>
     return (
       <>
@@ -72,7 +79,7 @@ class DashRoute extends Component {
         <BottomNavBar />
       </>
     );
-  }
-}
+  };
+};
 
 export default DashRoute;

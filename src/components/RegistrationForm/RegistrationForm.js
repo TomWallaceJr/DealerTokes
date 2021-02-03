@@ -1,18 +1,18 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { Input, Required, Label } from '../Form/Form'
-import AuthApiService from '../../services/auth-api-service'
-import Button from '../Button/Button'
-import './RegistrationForm.css'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Input, Required, Label } from '../Form/Form';
+import AuthApiService from '../../services/auth-api-service';
+import Button from '../Button/Button';
+import './RegistrationForm.css';
 
 class RegistrationForm extends Component {
   static defaultProps = {
     onRegistrationSuccess: () => { }
   }
 
-  state = { error: null }
+  state = { error: null };
 
-  firstInput = React.createRef()
+  firstInput = React.createRef();
 
   handleSubmit = ev => {
     ev.preventDefault()
@@ -31,11 +31,11 @@ class RegistrationForm extends Component {
       .catch(res => {
         this.setState({ error: res.error })
       })
-  }
+  };
 
   componentDidMount() {
     this.firstInput.current.focus()
-  }
+  };
 
   render() {
     const { error } = this.state
@@ -80,7 +80,7 @@ class RegistrationForm extends Component {
           />
         </div>
         <footer>
-          <Button type='submit'>
+          <Button type='submit' className='big-button'>
             Sign up
           </Button>
           {' '}
@@ -89,7 +89,7 @@ class RegistrationForm extends Component {
         </footer>
       </form>
     )
-  }
-}
+  };
+};
 
-export default RegistrationForm
+export default RegistrationForm;

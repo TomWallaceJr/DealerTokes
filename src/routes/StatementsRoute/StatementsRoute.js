@@ -1,16 +1,10 @@
 import React, { Component } from "react";
 import TokenService from "../../services/token-service";
-import WorkdayApiService from '../../services/workday-api-service';
 import UserContext from "../../contexts/UserContext";
 import config from "../../config";
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './StatementsRoute.css';
-import DateDetails from "../../components/DateDetails/DateDetails";
 import BottomNavBar from "../../components/BottomNavBar/BottomNavBar";
-import MonthlyStatement from "../../components/MonthlyStatement/MonthlyStatement";
-
-
 
 
 class DashRoute extends Component {
@@ -19,7 +13,7 @@ class DashRoute extends Component {
     state = {
         month: null,
         year: new Date().getFullYear()
-    }
+    };
 
     componentDidMount() {
         //console.log('component mounting')
@@ -30,13 +24,8 @@ class DashRoute extends Component {
         })
             .then(res => res.json())
             .then(res => this.context.setWorkdays(res))
-            .then(res => this.context.setLoading())
-    }
+    };
 
-    // onSubmit = (e) => {
-    //     e.preventDefault()
-    //     console.log('submit')
-    // }
 
     getTotalTokes = () => {
         let totalTokes = 0
@@ -45,7 +34,7 @@ class DashRoute extends Component {
             totalTokes += parseInt(workday.tokes)
         })
         return totalTokes
-    }
+    };
 
     getTotalHours = () => {
         let totalHours = 0
@@ -53,7 +42,7 @@ class DashRoute extends Component {
             totalHours += parseFloat(workday.hours)
         })
         return totalHours
-    }
+    };
 
     getTotalDowns = () => {
         let totalDowns = 0
@@ -62,15 +51,15 @@ class DashRoute extends Component {
         })
         console.log(totalDowns)
         return totalDowns
-    }
+    };
 
     getTokesPerHour = () => {
         return (this.getTotalTokes() / this.getTotalHours()).toFixed(2)
-    }
+    };
 
     getTokesPerDown = () => {
         return (this.getTotalTokes() / this.getTotalDowns()).toFixed(2)
-    }
+    };
 
     render() {
         // if (this.context.loading) return <p>Loading...</p>
@@ -117,7 +106,7 @@ class DashRoute extends Component {
                 <BottomNavBar />
             </>
         );
-    }
-}
+    };
+};
 
 export default DashRoute;
