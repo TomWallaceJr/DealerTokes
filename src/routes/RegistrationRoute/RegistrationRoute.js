@@ -20,8 +20,8 @@ class RegistrationRoute extends Component {
           A Web App for Poker Dealers to keep track of their income.
         </h4>
         <br />
-        <p>Demo Login: JD123</p>
-        <p>Demo Password: pass</p>
+        <p>Demo Login: twallace</p>
+        <p>Demo Password: Password123!</p>
         <RegistrationForm
           onRegistrationSuccess={this.handleRegistrationSuccess}
         />
