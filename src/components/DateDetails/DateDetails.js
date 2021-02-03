@@ -6,10 +6,6 @@ import WorkdayApiService from '../../services/workday-api-service';
 import './DateDetails.css';
 
 export default class DateDetails extends Component {
-    // static defaultProps = {
-    //     newWorkdaySubmitSuccess: () => { }
-    // };
-
     state = {
         error: null,
     };
@@ -27,13 +23,6 @@ export default class DateDetails extends Component {
             user_id: this.context.user.id
         };
         WorkdayApiService.postNewWorkday(newWorkday)
-            // .then(workday => {
-            //     hours.value = ''
-            //     downs.value = ''
-            //     tokes.value = ''
-            //     notes.value = ''
-            //     this.props.newWorkdaySubmitSuccess()
-            // })
             .catch(res => {
                 this.setState({ error: res.error })
             })
@@ -70,9 +59,9 @@ export default class DateDetails extends Component {
         //console.log(this.findWorkdayData(this.props.date))
         if (this.dataEntered(this.props.date)) {
             let daysData = this.getDaysData(this.props.date);
-            let formattedDate = this.props.date.toISOString().split('T')[0]
-            let user_id = daysData.user_id
-            console.log(daysData)
+            //let formattedDate = this.props.date.toISOString().split('T')[0]
+            //let user_id = daysData.user_id
+            //console.log(daysData)
             return (
                 <>
                     <form

@@ -83,7 +83,7 @@ export class UserProvider extends Component {
   }
 
   setLoading = () => {
-    console.log('set laoding')
+    //console.log('set laoding')
     this.setState({
       loading: !this.state.loading
     });

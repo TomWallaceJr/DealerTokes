@@ -56,7 +56,6 @@ class DashRoute extends Component {
 
 
   render() {
-    console.log(this.context.loading)
     if (this.context.loading) return <p>Loading...</p>
     return (
       <>

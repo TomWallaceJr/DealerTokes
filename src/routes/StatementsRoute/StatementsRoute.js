@@ -30,7 +30,7 @@ class DashRoute extends Component {
     getTotalTokes = () => {
         let totalTokes = 0
         this.context.workdays.forEach(workday => {
-            console.log(workday)
+            //console.log(workday)
             totalTokes += parseInt(workday.tokes)
         })
         return totalTokes
@@ -49,7 +49,7 @@ class DashRoute extends Component {
         this.context.workdays.forEach(workday => {
             totalDowns += parseInt(workday.downs)
         })
-        console.log(totalDowns)
+        //console.log(totalDowns)
         return totalDowns
     };
 

@@ -18,11 +18,15 @@ class LoginRoute extends Component {
 
   render() {
     return (
-      <section className='login-form'>
-        <LoginForm
-          onLoginSuccess={this.handleLoginSuccess}
-        />
-      </section>
+      <>
+        <p>Demo Username: JD123</p>
+        <p>Demo Password: pass</p>
+        <section className='login-form'>
+          <LoginForm
+            onLoginSuccess={this.handleLoginSuccess}
+          />
+        </section>
+      </>
     );
   }
 }
