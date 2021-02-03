@@ -16,7 +16,6 @@ class DashRoute extends Component {
 
   state = {
     date: null,
-    contextUpdated: false
   };
 
   componentDidMount() {
@@ -29,8 +28,7 @@ class DashRoute extends Component {
       .then(res => res.json())
       .then(res => this.context.setWorkdays(res))
       .then(res => this.context.setLoading())
-      // .then(res => this.context.setLoading())
-      .then(res => this.setState({ contextUpdated: true }))
+    // .then(res => this.context.setLoading())
   }
 
   componentWillUnmount() {

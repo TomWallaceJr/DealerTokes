@@ -30,6 +30,16 @@ const WorkdayApiService = {
                     : res.json()
             )
         // .then(res => console.log('response -', res.tokes))
+    },
+
+    deleteWorkday(userId, date) {
+        fetch(`${config.API_ENDPOINT}/workday/${userId}/date/${date}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${TokenService.getAuthToken()}`,
+            },
+        })
+            .catch(error => console.error({ error }))
     }
 };
 

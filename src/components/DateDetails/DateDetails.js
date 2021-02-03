@@ -6,9 +6,9 @@ import WorkdayApiService from '../../services/workday-api-service';
 import './DateDetails.css';
 
 export default class DateDetails extends Component {
-    static defaultProps = {
-        newWorkdaySubmitSuccess: () => { }
-    };
+    // static defaultProps = {
+    //     newWorkdaySubmitSuccess: () => { }
+    // };
 
     state = {
         error: null,
@@ -17,7 +17,6 @@ export default class DateDetails extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-
         const { hours, downs, tokes, notes } = e.target;
         const newWorkday = {
             date: this.props.date,
@@ -28,20 +27,28 @@ export default class DateDetails extends Component {
             user_id: this.context.user.id
         };
         WorkdayApiService.postNewWorkday(newWorkday)
-            .then(workday => {
-                hours.value = ''
-                downs.value = ''
-                tokes.value = ''
-                notes.value = ''
-                this.props.newWorkdaySubmitSuccess()
-            })
+            // .then(workday => {
+            //     hours.value = ''
+            //     downs.value = ''
+            //     tokes.value = ''
+            //     notes.value = ''
+            //     this.props.newWorkdaySubmitSuccess()
+            // })
             .catch(res => {
                 this.setState({ error: res.error })
             })
         window.location.reload();
     };
 
-    findWorkdayData(date) {
+    handleDelete() {
+        console.log('delete')
+        //console.log(this.context)
+        //console.log(this.props.date)
+        // WorkdayApiService.deleteWorkday(user_id, date)
+        window.location.reload();
+    }
+
+    dataEntered(date) {
         let formattedDate = date.toISOString().split('T')[0]
         return this.context.workdays.find(workday => {
             if (workday.date.split('T')[0] === formattedDate) {
@@ -50,11 +57,51 @@ export default class DateDetails extends Component {
         });
     };
 
+    getDaysData(date) {
+        let formattedDate = date.toISOString().split('T')[0]
+        return this.context.workdays.find(workday => {
+            if (workday.date.split('T')[0] === formattedDate) {
+                return workday
+            }
+        })
+    }
+
     render() {
         //console.log(this.findWorkdayData(this.props.date))
-        if (this.findWorkdayData(this.props.date)) {
+        if (this.dataEntered(this.props.date)) {
+            let daysData = this.getDaysData(this.props.date);
+            let formattedDate = this.props.date.toISOString().split('T')[0]
+            let user_id = daysData.user_id
+            console.log(daysData)
             return (
-                <p>sdfgdfhd</p>
+                <>
+                    <form
+                        className='new-workday-form'
+                    >
+                        <h3>Summary</h3>
+                        <div>
+                            <Label className='workday-display'>Date:</Label>
+                            <Label className='workday-display-data'>{daysData.date.split('T')[0]}</Label>
+                        </div>
+                        <div>
+                            <Label className='workday-display'>Hours Worked:</Label>
+                            <Label className='workday-display-data'>{daysData.hours}</Label>
+                        </div>
+                        <div>
+                            <Label className='workday-display'>Downs Dealt:</Label>
+                            <Label className='workday-display-data'>{daysData.downs}</Label>
+                        </div>
+                        <div>
+                            <Label className='workday-display'>Tokes Earned:</Label>
+                            <Label className='workday-display-data'>${daysData.tokes}</Label>
+                        </div>
+                        <div>
+                            <Label className='workday-display'>Notes:</Label>
+                            <Label className='workday-display-data'>{daysData.notes}</Label>
+                        </div>
+                        <button type='button' className='day-submit-button' onClick={this.handleDelete}>Delete Workday</button>
+                    </form>
+                </>
             );
         };
         return (

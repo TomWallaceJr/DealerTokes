@@ -15,6 +15,17 @@ h3 {
     width: 130px;
     text-align: left;
 }
+.workday-display {
+    display: inline-block;
+    width: 130px;
+    float: left;
+    text-align: right;
+    color: rgb(255, 255, 255);
+}
+
+.workday-display-label {
+    width: 20%;
+}
 
 .notes {
     text-align: top;
