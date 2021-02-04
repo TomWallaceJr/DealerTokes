@@ -30,7 +30,6 @@ export default class DateDetails extends Component {
     };
 
     handleDelete() {
-        console.log('delete')
         //console.log(this.context)
         //console.log(this.props.date)
         // WorkdayApiService.deleteWorkday(user_id, date)

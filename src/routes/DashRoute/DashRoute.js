@@ -19,7 +19,6 @@ class DashRoute extends Component {
   };
 
   componentDidMount() {
-    console.log('component mounting')
     fetch(`${config.API_ENDPOINT}/workday/${this.context.user.id}`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
